@@ -66,32 +66,32 @@ const Login = () => {
       <Header/>
 
       {/* Form for the sign-in sign-up */}
-      <div className="relative w-4/12 mx-auto right-0 left-0 p-5">
+      <div className="relative md:w-4/12 w-8/12 mx-auto right-0 left-0 md:p-5 p-3 md:my-0 my-6">
         <div className="absolute inset-0 bg-black bg-opacity-85"></div>
-        <div className="relative p-4  text-white">
+        <div className="relative md:p-4 p-3  text-white">
           <form action="" onSubmit={(e)=>e.preventDefault()} className='px-4'>
             {
-              signUpValue ? <h1 className='text-3xl font-bold mb-8'>Sign Up</h1> : <h1 className='text-3xl font-bold mb-8'>Sign In</h1>
+              signUpValue ? <h1 className='md:text-3xl text-2xl md:font-bold font-semibold mb-8'>Sign Up</h1> : <h1 className='md:text-3xl text-2xl md:font-bold font-semibold mb-8'>Sign In</h1>
             }
             {
-              signUpValue ? <input className='p-4 mb-6 w-11/12 rounded-md bg-transparent text-white placeholder-gray-400 border border-gray-400 focus:outline-none ' type="text" placeholder='Username' ref={username}/> : null
+              signUpValue ? <input className='md:p-4 p-2 mb-6 w-11/12 rounded-md bg-transparent text-white placeholder-gray-400 border border-gray-400 focus:outline-none ' type="text" placeholder='Username' ref={username}/> : null
             }
             <input
-             className='p-4 mb-6 w-11/12 rounded-md bg-transparent text-white placeholder-gray-400 border border-gray-400 focus:outline-none '
+             className='md:p-4 p-2 mb-6 w-11/12 rounded-md bg-transparent text-white placeholder-gray-400 border border-gray-400 focus:outline-none '
               type="email"
                placeholder='Email'
                 ref={email}
             />
             <input
-             className='p-4 mb-6 w-11/12 rounded-md bg-transparent text-white placeholder-gray-400 border border-gray-400 focus:outline-none'
+             className='md:p-4 p-2 mb-6 w-11/12 rounded-md bg-transparent text-white placeholder-gray-400 border border-gray-400 focus:outline-none'
               type="password"
                placeholder='Password'
                 ref={password}
             />
 
-            <p className='text-red-600 font-semibold'>{errorMessage}</p>
+            <p className='text-red-600 md:font-semibold font-medium'>{errorMessage}</p>
 
-            <button className='bg-red-700 w-11/12 p-2 rounded-md mb-12 ' onClick={handleButton}>
+            <button className='bg-red-700 w-11/12 md:p-2 p-1 rounded-md md:mb-12 mb-9 ' onClick={handleButton}>
               {signUpValue ? "Sign Up" : "Sign In"}
             </button>
             <p className='text-gray-400'>
