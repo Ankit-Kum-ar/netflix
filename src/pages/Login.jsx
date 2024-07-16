@@ -4,7 +4,6 @@ import { validateSignIn } from '../utils/validateSignIn';
 import { validateSignUp } from '../utils/validateSignUp';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from '../utils/firebase';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../redux/Slices/userSlice';
 
@@ -15,8 +14,6 @@ const Login = () => {
   const password = useRef(null);
   const username = useRef(null);
   const dispatch = useDispatch();
-
-  const navigate = useNavigate();
 
   const [errorMessage, setErrorMessage] = useState("");
   const handleForm = () => {
@@ -46,7 +43,6 @@ const Login = () => {
       .then((userCredential) => {
         // Signed up 
         const user = userCredential.user;
-        console.log(user);
 
         // Update API called...
         updateProfile(user, {
@@ -58,7 +54,6 @@ const Login = () => {
         }).catch((error) => {
           setErrorMessage(error);
         });
-        navigate('/browser');
       })
       .catch(() => {
         setErrorMessage("The Email has already sign up.");
@@ -69,9 +64,7 @@ const Login = () => {
       signInWithEmailAndPassword(auth, email.current.value, password.current.value)
       .then((userCredential) => {
         // Signed in 
-        const user = userCredential.user;
-        console.log(user);
-        navigate('/browser');
+        const user = userCredential.user; 
       })
       .catch(() => {
         setErrorMessage("Invalid Details");

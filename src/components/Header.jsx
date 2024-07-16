@@ -4,18 +4,44 @@ import { FaUser } from "react-icons/fa";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { addUser, removeUser } from "../redux/Slices/userSlice";
 const Header = () => {
 
     const navigate = useNavigate();
     const user = useSelector((state) => state.user.user);
+    const dispatch = useDispatch();
+
+    // Call the API of onAuthStateChange (this is like an event listener, so called at once).
+    // At once can be done by useEffect().
+    useEffect(() => {
+      onAuthStateChanged(auth, (user) => {
+        // When user Sign-In or Sign-out then this condition execute.
+        if (user) { 
+  
+          const {uid, email, displayName} = user;
+          // Here we dispatch the user to store.
+          dispatch(addUser({uid,email,displayName}));
+          navigate('/browser')
+          
+  
+        } else { // When user Sign-Out then this condition execute.
+  
+          // Here we dispatch the user to store.
+          dispatch(removeUser());
+          navigate('/')
+        }
+      });
+    }, [])
     
     const handleSignOut = () => {
       // Here write the signOut Logic for sign out the user from App using firebox
       signOut(auth).then(() => {
-        navigate("/");
       }).catch((error) => {
         // An error happened.
-      });
+      }); 
     }
     return (
       <div>
