@@ -2,8 +2,11 @@ import React, { useRef, useState } from 'react'
 import Header from '../components/Header'
 import { validateSignIn } from '../utils/validateSignIn';
 import { validateSignUp } from '../utils/validateSignUp';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from '../utils/firebase';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addUser } from '../redux/Slices/userSlice';
 
 const Login = () => {
 
@@ -11,7 +14,9 @@ const Login = () => {
   const email = useRef(null);
   const password = useRef(null);
   const username = useRef(null);
+  const dispatch = useDispatch();
 
+  const navigate = useNavigate();
 
   const [errorMessage, setErrorMessage] = useState("");
   const handleForm = () => {
@@ -27,20 +32,33 @@ const Login = () => {
       msg =  validateSignIn(email.current.value, password.current.value);
       setErrorMessage(msg);
     }
-    else {
+    else {  
       msg =  validateSignUp(email.current.value, password.current.value, username.current.value); 
       setErrorMessage(msg);
     }
 
     // Sign Up / Sign Up Logic
     if(msg.length > 0) return;
+
     if(signUpValue) {
       // Here write the signUp Logic for registering a user to App using firebox
-      createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
+      createUserWithEmailAndPassword(auth, email.current.value, password.current.value, username.current.value)
       .then((userCredential) => {
         // Signed up 
         const user = userCredential.user;
         console.log(user);
+
+        // Update API called...
+        updateProfile(user, {
+          displayName: username.current.value
+        }).then(() => {
+          // Profile updated!
+          const {uid, email, displayName} = auth.currentUser; // To access current user, we use auth.currentUser rather than user.
+          dispatch(addUser({uid, email, displayName}));
+        }).catch((error) => {
+          setErrorMessage(error);
+        });
+        navigate('/browser');
       })
       .catch(() => {
         setErrorMessage("The Email has already sign up.");
@@ -53,6 +71,7 @@ const Login = () => {
         // Signed in 
         const user = userCredential.user;
         console.log(user);
+        navigate('/browser');
       })
       .catch(() => {
         setErrorMessage("Invalid Details");
