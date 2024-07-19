@@ -12,7 +12,7 @@ export const usePopularMovies = () => {
         // const response = await fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1', API_OPTIONS)
         const response = await fetch('https://api.themoviedb.org/3/trending/movie/day?language=en-US', API_OPTIONS)
         const data = await response.json()
-        console.log(data?.results)
+        // console.log(data?.results)
         // Dispatch the action to set the movies
         dispatch(addPopularMovies(data?.results))
     }

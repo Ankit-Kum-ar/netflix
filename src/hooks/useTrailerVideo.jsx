@@ -17,7 +17,7 @@ const useTrailerVideo = (movieId) => {
         const data = await response.json();
         // console.log(data);
         const trailerType = data.results.filter((video) => video.type="Trailer"); // Filter those objects who have type = trailer
-        // console.log(trailerType);
+        console.log(trailerType);
         const trailer = trailerType.length === 0 ? data?.results[0] : trailerType[12]; // Save a single trailer by checking that trailerType array is not empty.
         // console.log(trailer)
         dispatch(addTrailerVideo(trailer));
