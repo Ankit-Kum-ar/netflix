@@ -75,7 +75,7 @@ const Login = () => {
     
   }
   return (
-    <div className='bg-cover w-screen h-screen bg-repeat-y' style={{backgroundImage: `url(${bgImage})`}}>
+    <div className='bg-cover w-screen h-screen' style={{backgroundImage: `url(${bgImage})`}}>
       <Header/>
 
       {/* Form for the sign-in sign-up */}

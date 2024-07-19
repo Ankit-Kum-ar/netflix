@@ -8,12 +8,14 @@ import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser, removeUser } from "../redux/Slices/userSlice";
-const Header = ({absoluteValue}) => {
+import { toggleGptSearchView } from "../redux/Slices/gptSlice";
+const Header = () => {
 
     const navigate = useNavigate();
     const user = useSelector((state) => state.user.user);
     const dispatch = useDispatch();
     const [isAbsolute, setIsAbsolute] = useState(false);
+    const showGptSearch = useSelector((store) => store.gpt?.showGptSearch)
 
     // Call the API of onAuthStateChange (this is like an event listener, so called at once).
     // At once can be done by useEffect().
@@ -46,6 +48,13 @@ const Header = ({absoluteValue}) => {
         // An error happened.
       }); 
     }
+
+    const handleGptButton = () => {
+      dispatch(toggleGptSearchView());
+      // setIsAbsolute(!isAbsolute);
+    }
+
+
     return (
       <div className={` ${isAbsolute ? 'bg-black  top-0 w-screen absolute' : ''}`}>
         <div className="md:pl-14 pl-3 py-2 bg-gradient-to-b from-gray-950 flex justify-between">
@@ -53,7 +62,8 @@ const Header = ({absoluteValue}) => {
           {
             // Check if user sign in or sign out, bcz userSlice is null if user is signOut.
             user ? (
-              <div className="md:my-4 md:mr-12 mr-3 mt-3.5">
+              <div className="md:my-4 md:mr-12 mr-3 mt-3.5 flex gap-8">
+                <button className="p-2 px-4 bg-red-900 text-white rounded-md font-semibold" onClick={handleGptButton}>{showGptSearch ? "Home Page" : "GPT-Search"}</button>
                 <button className="bg-red-700 md:p-2 p-[2px] px-[3px] md:px-4 md:rounded-md rounded md:text-base text-[9px] text-white md:font-semibold font-medium flex md:gap-2 gap-1 justify-center items-center" onClick={handleSignOut}>
                   <span className="my-1"><FaUser /></span>
                   Sign Out
