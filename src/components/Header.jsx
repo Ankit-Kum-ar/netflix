@@ -53,8 +53,8 @@ const Header = ({absoluteValue}) => {
           {
             // Check if user sign in or sign out, bcz userSlice is null if user is signOut.
             user ? (
-              <div className="my-4 mr-12 ">
-                <button className="bg-red-700 p-2 px-4 rounded-md text-white font-semibold flex gap-2" onClick={handleSignOut}>
+              <div className="md:my-4 md:mr-12 mr-3 mt-3.5">
+                <button className="bg-red-700 md:p-2 p-[2px] px-[3px] md:px-4 md:rounded-md rounded md:text-base text-[9px] text-white md:font-semibold font-medium flex md:gap-2 gap-1 justify-center items-center" onClick={handleSignOut}>
                   <span className="my-1"><FaUser /></span>
                   Sign Out
                 </button>
