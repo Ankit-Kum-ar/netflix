@@ -9,8 +9,8 @@ import { useUpcomingMovies } from '../hooks/useUpcomingMovies';
 import { useTvShows } from '../hooks/useTvShows';
 import { usePopularShow } from '../hooks/usePopularShows';
 import { useTopRatedShows } from '../hooks/useTopRatedShows';
-import GptSearch from '../components/GptSearch';
 import { useSelector } from 'react-redux';
+import GeminiSearch from '../components/GeminiSearch';
 const Browser = () => {
 
   useNowPlayingMovies();
@@ -20,14 +20,14 @@ const Browser = () => {
   useTvShows();
   usePopularShow();
   useTopRatedShows();
-  const gptSearch = useSelector((store) => store.gpt?.showGptSearch);
+  const geminiSearch = useSelector((store) => store.gemini?.showGeminiSearch);
 
   return (
     <div>
       <Header/>
       {
-        gptSearch ? 
-          (<GptSearch/>) :
+        geminiSearch ? 
+          (<GeminiSearch/>) :
           (
             <>
               <MainContainer/>
