@@ -1,11 +1,30 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { MOVIECARD_IMAGE_URL } from '../utils/constant';
 import Shimmer from '../Helpers/Shimmer';
 
 const GeminiMovieSuggestion = ( {loading} ) => {
   const movies = useSelector((store) => store.gemini?.geminiMovies);
-  console.log(movies);
+  // console.log(movies);
+  const [maxLength, setMaxLength] = useState(99);
+
+  // Function to get the current screen size
+  const updateMaxLength = () => {
+    const width = window.innerWidth;
+    if (width >= 768) {
+      setMaxLength(200); // Set maxLength for md screens
+    } else {
+      setMaxLength(85); // Set maxLength for smaller screens
+    }
+  };
+
+  // Update maxLength on component mount and window resize
+  useEffect(() => {
+    updateMaxLength();
+    window.addEventListener('resize', updateMaxLength);
+    return () => window.removeEventListener('resize', updateMaxLength);
+  }, []);
+
 
   if(movies === null) return;
 
@@ -25,7 +44,7 @@ const GeminiMovieSuggestion = ( {loading} ) => {
   if(filteredMovies === null) return;
   return (
     <div className='flex justify-center items-center'>
-      <div className='flex flex-col overflow-y-scroll bg-black w-8/12 bg-opacity-80 rounded-2xl md:mt-3 mt-[10%] hide-scrollbar md:max-h-53vh max-h-65vh' >
+      <div className='flex flex-col overflow-y-scroll bg-black md:w-6/12 w-9/12 bg-opacity-80 rounded-2xl md:mt-3 mt-[9%] hide-scrollbar md:max-h-53vh max-h-65vh' >
         { loading ? (
             <Shimmer/>
           ) : 
@@ -34,7 +53,7 @@ const GeminiMovieSuggestion = ( {loading} ) => {
               <img src={MOVIECARD_IMAGE_URL + movie.poster_path} alt={movie.title} className='w-3/12 rounded-sm'/>
               <div className='flex flex-col ml-[6%]'>
                 <h1 className='text-white md:text-xl text-base md:font-semibold font-medium'>{movie.title}</h1>
-                <p className='text-white mt-2 md:text-base text-xs'>{truncateText(movie.overview, 99)}</p>
+                <p className='text-white mt-2 md:text-base text-xs'>{truncateText(movie.overview, maxLength)}</p>
               </div>
             </div>
           )))

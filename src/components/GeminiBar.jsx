@@ -81,7 +81,7 @@ const GeminiBar = ({ setLoading }) => {
             ref={inputText}
         />
         <button 
-            className='bg-red-800 text-white md:px-4 px-3 md:py-2.5 py-1.5 w-3/12 md:rounded-xl rounded-md' 
+            className='bg-red-800 text-white md:px-4 px-3 md:py-2.5 py-1 w-3/12 md:rounded-xl rounded-md' 
             onClick={handleButton}>
             Search
         </button>
