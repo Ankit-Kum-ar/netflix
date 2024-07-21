@@ -65,12 +65,12 @@ const Header = () => {
           {
             // Check if user sign in or sign out, bcz userSlice is null if user is signOut.
             user ? (
-              <div className="md:my-4 md:mr-12 mr-3 mt-3.5 flex gap-8">
-                <button className="p-2 px-4 bg-red-900 text-white rounded-md font-semibold" onClick={handleGptButton}>
+              <div className="md:my-4 md:mr-12 mr-3 mb-2 mt-3.5 flex md:gap-8 gap-5">
+                <button className="md:p-2 p-1 md:px-4 bg-red-900 md:py-0 text-white md:rounded-md rounded md:text-base text-[9px] md:font-semibold font-medium" onClick={handleGptButton}>
                   {geminiSearch ? <span className="flex justify-center items-center" ><FaHome /> &nbsp; Home</span> : 
                     <span className="flex justify-center items-center" ><FaSearch /> &nbsp; Search</span>}
                 </button>
-                <button className="bg-red-700 md:p-2 p-[2px] px-[3px] md:px-4 md:rounded-md rounded md:text-base text-[9px] text-white md:font-semibold font-medium flex md:gap-2 gap-1 justify-center items-center" onClick={handleSignOut}>
+                <button className="bg-red-700 md:p-2 p-1 md:px-4 md:rounded-md rounded md:text-base text-[9px] text-white md:font-semibold font-medium flex md:gap-2 gap-1 justify-center items-center" onClick={handleSignOut}>
                   <span className="my-1"><FaUser /></span>
                   Sign Out
                 </button>

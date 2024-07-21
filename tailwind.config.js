@@ -8,6 +8,11 @@ module.exports = {
       placeholderColor: {
         'black': '#000000',
       },
+      maxHeight: {
+        '65vh': '65vh',
+        '53vh': '53vh',
+        '43vh': '43vh',
+      },
     },
   },
   plugins: [],
