@@ -5,7 +5,7 @@ import VideoBackground from './VideoBackground';
 
 const MainContainer = () => {
     const movies = useSelector((store) => store.movie?.nowPlayingMovies);
-    console.log(movies);
+    // console.log(movies);
     if(movies.length === 0) return;
     // Find the main movie from the nowPlayingMovies array.
     const mainMovie = movies.find((movie) => (movie.title === "Bad Boys: Ride or Die"))
