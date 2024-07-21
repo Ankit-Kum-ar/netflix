@@ -7,7 +7,8 @@ const MainContainer = () => {
     const movies = useSelector((store) => store.movie?.nowPlayingMovies);
     console.log(movies);
     if(movies.length === 0) return;
-    const mainMovie = movies[6]; 
+    // Find the main movie from the nowPlayingMovies array.
+    const mainMovie = movies.find((movie) => (movie.title === "Bad Boys: Ride or Die"))
     const {original_title, overview, id} = mainMovie;
   return (
     <div>
