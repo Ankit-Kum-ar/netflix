@@ -1,14 +1,14 @@
 import {configureStore} from "@reduxjs/toolkit"
 import userReducer from "./Slices/userSlice"
 import movieSlice from "./Slices/movieSlice"
-import gptSlice from "./Slices/gptSlice"
+import geminiSlice from "./Slices/geminiSlice"
 
 const store = configureStore({
     reducer: {
         // Add reducers here
         user: userReducer,
         movie: movieSlice,
-        gpt: gptSlice
+        gemini: geminiSlice
     }
 })
 
