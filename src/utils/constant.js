@@ -10,3 +10,7 @@ export const API_OPTIONS = {
 export const MOVIECARD_IMAGE_URL = "https://image.tmdb.org/t/p/w500/";
 
 export const API_KEY_GEMINI = process.env.REACT_APP_GEMINI_API
+
+export const title = "Deadpool & Wolverine"
+export const description = "A listless Wade Wilson toils away in civilian life with his days as the morally flexible mercenary, Deadpool, behind him. But when his homeworld faces an existential threat, Wade must reluctantly suit-up again with an even more reluctant Wolverine."
+export const movieId = 533535
